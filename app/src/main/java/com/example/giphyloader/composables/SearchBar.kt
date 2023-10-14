@@ -21,12 +21,12 @@ import com.example.giphyloader.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
+    value: String,
     modifier: Modifier = Modifier,
-    query: String,
     onValueChange: (String) -> Unit
 ) {
     TextField(
-        value = query,
+        value = value,
         onValueChange = onValueChange,
         leadingIcon = {
             Icon(

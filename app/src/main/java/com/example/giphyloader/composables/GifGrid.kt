@@ -1,16 +1,19 @@
 package com.example.giphyloader.composables
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.decode.ImageDecoderDecoder
@@ -30,17 +33,27 @@ fun GifGrid(
         contentPadding = PaddingValues(vertical = 8.dp),
         content = {
             items(gifList, key = { it.id }) { item ->
-                AsyncImage(
+                    AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
-                        .data(item.images.downsized_medium.url)
+                        .data(item.images.fixed_width_downsampled.url)
                         .decoderFactory(ImageDecoderDecoder.Factory())
                         .build(),
                     contentDescription = null,
-                    modifier = Modifier.clip(
-                        RoundedCornerShape(6.dp),
-                    )
+                    modifier = Modifier
+                        .size(width = pxToDp(item.images.fixed_height_downsampled.width, LocalContext.current),
+                            height = pxToDp(item.images.fixed_width_downsampled.height, LocalContext.current))
+                        .clip(RoundedCornerShape(6.dp)),
+                    contentScale = ContentScale.Crop
                 )
             }
         }
     )
+}
+
+fun pxToDp(pxValue: String, context: Context): Dp {
+    val screenPixelDensity = context.resources.displayMetrics.density
+    var dpVal = pxValue.toFloat() / screenPixelDensity
+    dpVal *= 2
+
+    return dpVal.toInt().dp
 }

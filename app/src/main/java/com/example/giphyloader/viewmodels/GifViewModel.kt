@@ -1,18 +1,12 @@
 package com.example.giphyloader.viewmodels
 
-import android.util.Log
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.giphyloader.common.SearchFieldState
 import com.example.giphyloader.common.ViewState
 import com.example.giphyloader.network.GifRepository
 import com.example.giphyloader.network.models.GiphyItem
-import com.example.giphyloader.network.models.GiphyResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.ktor.client.HttpClient
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -46,7 +40,7 @@ class GifViewModel @Inject constructor(private val gifRepository: GifRepository)
                     return@collectLatest
                 }
 
-                //TODO: Response handling
+                //TODO: response handling
                 _gifList.update {
                     gifRepository.searchQuery(input)
                 }
@@ -61,7 +55,7 @@ class GifViewModel @Inject constructor(private val gifRepository: GifRepository)
         _searchFieldState.update { SearchFieldState.INPUT }
     }
     fun clearInput() {
-        //TODO: cancel request?
+        //TODO: cancel request
         _viewState.update { ViewState.IDLE }
         _inputText.update { "" }
         _searchFieldState.update { SearchFieldState.EMPTY }

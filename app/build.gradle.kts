@@ -6,6 +6,8 @@ plugins {
     id ("kotlinx-serialization")
 }
 
+val ktorVersion = "2.3.5"
+
 android {
     namespace = "com.example.giphyloader"
     compileSdk = 34
@@ -77,14 +79,13 @@ dependencies {
 
     implementation ("androidx.compose.foundation:foundation:1.5.3")
 
-    implementation ("io.ktor:ktor-client-core:2.2.3")
-    implementation ("io.ktor:ktor-client-android:2.2.3")
-    implementation ("io.ktor:ktor-client-serialization:2.2.3")
-    implementation ("io.ktor:ktor-client-logging:2.2.3")
-    implementation ("io.ktor:ktor-client-content-negotiation:2.2.3")
-    implementation ("io.ktor:ktor-serialization-kotlinx-json:2.2.3")
+    implementation ("io.ktor:ktor-client-core:$ktorVersion")
+    implementation ("io.ktor:ktor-client-android:$ktorVersion")
+    implementation ("io.ktor:ktor-client-serialization:$ktorVersion")
+    implementation ("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+    implementation ("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
     implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
     implementation("com.google.dagger:hilt-android:2.45")

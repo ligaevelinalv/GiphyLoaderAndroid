@@ -24,9 +24,9 @@ import com.example.giphyloader.common.SearchFieldState
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar(
+    modifier: Modifier = Modifier,
     inputText: String,
     searchFieldState: SearchFieldState,
-    modifier: Modifier = Modifier,
     onSearchInputChanged: (String) -> Unit,
     onClearInputClicked: () -> Unit,
 ) {

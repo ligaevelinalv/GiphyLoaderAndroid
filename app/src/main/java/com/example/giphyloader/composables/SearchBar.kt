@@ -38,7 +38,7 @@ fun SearchBar(
                 Icon(
                     imageVector = Icons.Default.Search,
                     contentDescription = null,
-                    tint = colorResource(id = R.color.dark_purple)
+                    tint = colorResource(id = R.color.dark_purple),
                 )
             }
         },
@@ -66,7 +66,7 @@ fun SearchBar(
             focusedIndicatorColor = Color.Transparent,
             containerColor = colorResource(id = R.color.light_purple),
             placeholderColor = colorResource(id = R.color.dark_purple),
-            cursorColor = colorResource(id = R.color.dark_purple)
-        )
+            cursorColor = colorResource(id = R.color.dark_purple),
+        ),
     )
 }

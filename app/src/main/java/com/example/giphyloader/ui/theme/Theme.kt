@@ -20,13 +20,13 @@ import com.example.giphyloader.R
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
-    tertiary = Pink80
+    tertiary = Pink80,
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
-    tertiary = Pink40
+    tertiary = Pink40,
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -44,18 +44,16 @@ fun GiphyLoaderTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
-
     val systemBarColor = colorResource(id = R.color.system_bar_purple)
 
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
-            if (darkTheme){
+            if (darkTheme) {
                 dynamicDarkColorScheme(context)
-            }
-            else {
+            } else {
                 dynamicLightColorScheme(context)
             }
         }
@@ -76,6 +74,6 @@ fun GiphyLoaderTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
-        content = content
+        content = content,
     )
 }

@@ -9,5 +9,5 @@ data class PaginationObject(
     @SerialName("total_count")
     val total_count: Int,
     @SerialName("count")
-    val count: Int
+    val count: Int,
 )

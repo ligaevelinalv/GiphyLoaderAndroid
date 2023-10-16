@@ -20,7 +20,7 @@ import com.example.giphyloader.viewmodels.GifViewModel
 @Composable
 fun GifScreen(
     modifier: Modifier = Modifier,
-    viewModel: GifViewModel = hiltViewModel()
+    viewModel: GifViewModel = hiltViewModel(),
 ) {
     val requestState = viewModel.requestState.collectAsState(RequestState.Idle()).value
     val searchFieldState = viewModel.searchFieldState.collectAsState().value
@@ -33,7 +33,7 @@ fun GifScreen(
             searchFieldState = searchFieldState,
             modifier = modifier.padding(16.dp),
             onSearchInputChanged = { input -> viewModel.updateInput(input) },
-            onClearInputClicked = { viewModel.clearInput() }
+            onClearInputClicked = { viewModel.clearInput() },
         )
 
         LaunchedEffect(requestState) {
@@ -65,14 +65,12 @@ fun GifScreen(
                     GifGrid(
                         modifier = modifier.padding(
                             start = 16.dp,
-                            end = 16.dp
+                            end = 16.dp,
                         ),
-                        it
+                        it,
                     )
                 }
             }
-
-            else -> {}
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.giphyloader.network.models
 
 import kotlinx.serialization.SerialName
+
 @kotlinx.serialization.Serializable
 data class GiphyImages(
     @SerialName("fixed_width_downsampled")

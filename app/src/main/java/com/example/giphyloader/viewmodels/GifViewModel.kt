@@ -34,7 +34,7 @@ class GifViewModel @Inject constructor(private val gifRepository: GifRepository)
                     _requestState.tryEmit(RequestState.Idle())
                     return@collectLatest
                 }
-                 gifRepository.searchQuery(input)
+                gifRepository.searchQuery(input)
             }
         }
     }
@@ -43,8 +43,9 @@ class GifViewModel @Inject constructor(private val gifRepository: GifRepository)
         _inputText.update { inputText }
         _searchFieldState.update { SearchFieldState.INPUT }
     }
+
     fun clearInput() {
-        //TODO: cancel request
+        // TODO: cancel request
         _requestState.tryEmit(RequestState.Idle())
         _inputText.update { "" }
         _searchFieldState.update { SearchFieldState.EMPTY }

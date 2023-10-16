@@ -7,5 +7,5 @@ data class GiphyItem(
     @SerialName("id")
     val id: String,
     @SerialName("images")
-    val images: GiphyImages
+    val images: GiphyImages,
 )

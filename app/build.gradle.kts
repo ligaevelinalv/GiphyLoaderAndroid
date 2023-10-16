@@ -3,7 +3,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id ("kotlinx-serialization")
+    id("kotlinx-serialization")
 }
 
 val ktorVersion = "2.3.5"
@@ -18,7 +18,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        buildConfigField ("String", "BASE_URL", "\"https://api.giphy.com/v1/\"")
+        buildConfigField("String", "BASE_URL", "\"https://api.giphy.com/v1/\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -60,7 +60,6 @@ kapt {
 }
 
 dependencies {
-
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.8.0")
@@ -77,22 +76,30 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    implementation ("androidx.compose.foundation:foundation:1.5.3")
+    // LazyVerticalStaggeredGrid
+    implementation("androidx.compose.foundation:foundation:1.5.3")
 
-    implementation ("io.ktor:ktor-client-core:$ktorVersion")
-    implementation ("io.ktor:ktor-client-android:$ktorVersion")
-    implementation ("io.ktor:ktor-client-serialization:$ktorVersion")
-    implementation ("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-    implementation ("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+    //Ktor
+    implementation("io.ktor:ktor-client-core:$ktorVersion")
+    implementation("io.ktor:ktor-client-android:$ktorVersion")
+    implementation("io.ktor:ktor-client-serialization:$ktorVersion")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+    //JSON serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
-    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
-    implementation("com.google.dagger:hilt-android:2.45")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    // Hilt/ Dagger
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("com.google.dagger:hilt-android:2.48.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.48.1")
 
+    // Coil, GIF ext
     implementation("io.coil-kt:coil-compose:2.4.0")
     implementation("io.coil-kt:coil-gif:2.4.0")
 
-    implementation("io.github.mmolosay:debounce:1.2.0")
+    // Splashscreen
+    dependencies {
+        implementation("androidx.core:core-splashscreen:1.0.1")
+    }
 }

@@ -1,7 +1,6 @@
 package com.example.giphyloader.composables
 
 import android.content.Context
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.size
@@ -14,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -22,12 +20,12 @@ import coil.compose.AsyncImage
 import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
 import com.example.giphyloader.R
-import com.example.giphyloader.network.models.GiphyItem
+import com.example.giphyloader.network.models.GifModel
 
 @Composable
 fun GifGrid(
     modifier: Modifier = Modifier,
-    gifList: List<GiphyItem>
+    gifList: List<GifModel>,
 ) {
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(3),
@@ -39,27 +37,21 @@ fun GifGrid(
             items(gifList, key = { it.id }) { item ->
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
-                        .data(item.images.fixed_width_downsampled.url)
+                        .data(item.url)
                         .decoderFactory(ImageDecoderDecoder.Factory())
                         .build(),
                     placeholder = painterResource(id = R.drawable.img_placeholder),
                     contentDescription = null,
                     modifier = Modifier
                         .size(
-                            width = pxToDp(
-                                item.images.fixed_height_downsampled.width,
-                                LocalContext.current
-                            ),
-                            height = pxToDp(
-                                item.images.fixed_width_downsampled.height,
-                                LocalContext.current
-                            )
+                            width = pxToDp(item.width, LocalContext.current),
+                            height = pxToDp(item.height, LocalContext.current),
                         )
                         .clip(RoundedCornerShape(6.dp)),
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Crop,
                 )
             }
-        }
+        },
     )
 }
 

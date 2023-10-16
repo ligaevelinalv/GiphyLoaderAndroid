@@ -9,5 +9,5 @@ data class GiphyURL(
     @SerialName("width")
     val width: String,
     @SerialName("height")
-    val height: String
+    val height: String,
 )

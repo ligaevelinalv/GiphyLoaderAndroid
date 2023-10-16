@@ -9,5 +9,5 @@ data class GiphyResponse(
     @SerialName("pagination")
     val pagination: PaginationObject,
     @SerialName("meta")
-    val meta: MetaObject
+    val meta: MetaObject,
 )

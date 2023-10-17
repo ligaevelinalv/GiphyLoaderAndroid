@@ -9,5 +9,5 @@ data class MetaObject(
     @SerialName("status")
     val status: Int,
     @SerialName("response_id")
-    val response_id: String = "",
+    val responseId: String = "",
 )

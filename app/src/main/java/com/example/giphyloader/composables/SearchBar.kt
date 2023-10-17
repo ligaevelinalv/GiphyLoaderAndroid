@@ -50,7 +50,7 @@ fun SearchBar(
             {
                 Icon(
                     imageVector = Icons.Default.Close,
-                    contentDescription = null,
+                    contentDescription = stringResource(R.string.clear_keyword_and_search_results),
                     tint = colorResource(id = R.color.dark_purple),
                     modifier = Modifier.clickable { onClearInputClicked.invoke() },
                 )

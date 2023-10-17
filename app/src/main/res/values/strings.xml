@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">GiphyLoader</string>
     <string name="search_gifs">Search GIFs</string>
-    <string name="start_searching">Start searching</string>
     <string name="error">An error has occurred. Please try again.</string>
+    <string name="clear_keyword_and_search_results">Clear keyword and search results</string>
 </resources>

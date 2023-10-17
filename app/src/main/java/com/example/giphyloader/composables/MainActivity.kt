@@ -12,8 +12,6 @@ import com.example.giphyloader.R
 import com.example.giphyloader.ui.theme.GiphyLoaderTheme
 import dagger.hilt.android.AndroidEntryPoint
 
-const val TAG = "MainActivity"
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 

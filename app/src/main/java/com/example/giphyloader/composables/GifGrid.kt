@@ -1,6 +1,7 @@
 package com.example.giphyloader.composables
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.size
@@ -49,7 +50,7 @@ fun GifGrid(
                         .decoderFactory(ImageDecoderDecoder.Factory())
                         .build(),
                     placeholder = painterResource(id = R.drawable.img_placeholder),
-                    contentDescription = null,
+                    contentDescription = "Gif ${index + 1}",
                     modifier = Modifier
                         .size(
                             width = pxToDp(item.width, LocalContext.current),

@@ -24,6 +24,7 @@ While building on an emulator is possible and the app will be usable, for better
 ## Figma
 
 An initial design was created for this app in Figma. To view this and screenshots from the app, open [this link](https://www.figma.com/file/5Ax7ZhojQ0gUbKV14xHUwX/GiphyLoader?type=design&node-id=0%3A1&mode=design&t=zApiQujxuuOBIZLi-1).
+![Model](https://raw.githubusercontent.com/ligaevelinalv/GiphyLoaderAndroid/master/app_screens.png?token=GHSAT0AAAAAACIHZDBIVTHYZARZLIEFLVOEZJOWXPQ)
 
 ## Sources used for reference
 

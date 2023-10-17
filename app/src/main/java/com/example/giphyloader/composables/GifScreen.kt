@@ -25,6 +25,9 @@ fun GifScreen(
     val viewState = viewModel.viewState.collectAsState().value
     val inputText = viewModel.query.collectAsState().value
     val focusManager = LocalFocusManager.current
+    val clearFocus = {
+        focusManager.clearFocus()
+    }
 
     Column {
         SearchBar(
@@ -37,7 +40,7 @@ fun GifScreen(
 
         LaunchedEffect(viewState) {
             if (viewState == ViewState.IDLE) {
-                focusManager.clearFocus()
+                clearFocus()
             }
         }
 
@@ -47,6 +50,7 @@ fun GifScreen(
             }
 
             gifList.loadState.refresh is LoadState.Error -> {
+                clearFocus()
                 ViewStatusCard(drawable = R.drawable.ic_error, text = R.string.error)
             }
 
@@ -56,6 +60,7 @@ fun GifScreen(
 
             else -> {
                 if (gifList.itemSnapshotList.size == 0) {
+                    clearFocus()
                     ViewStatusCard(drawable = R.drawable.ic_error, text = R.string.error)
                 }
                 GifGrid(

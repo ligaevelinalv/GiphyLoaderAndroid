@@ -24,6 +24,9 @@ import coil.request.ImageRequest
 import com.example.giphyloader.R
 import com.example.giphyloader.network.models.GifModel
 
+/*
+LazyVerticalStaggeredGrid which uses AsyncImage composable from Coil library to display GIFs
+ */
 @Composable
 fun GifGrid(
     modifier: Modifier = Modifier,
@@ -63,6 +66,11 @@ fun GifGrid(
     }
 }
 
+/*
+ Function converts the dimensions of a GIF in pixels to Dp based on the pixel density
+ of the current device, then scales GIF dimensions up by two to make them look the best
+ in a three column grid on a mobile phone
+ */
 fun pxToDp(pxValue: String, context: Context): Dp {
     return ((pxValue.toFloat() / context.resources.displayMetrics.density) * 2).toInt().dp
 }

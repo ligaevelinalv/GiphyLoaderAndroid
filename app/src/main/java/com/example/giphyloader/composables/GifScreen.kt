@@ -44,6 +44,11 @@ fun GifScreen(
             }
         }
 
+        /*
+        This when block uses the viewState and gifList variables to determine what to show under the
+        search field based on the state of app. gifList itself is not enough to determine the state
+        because it does not have default implementations for network loss, idle and success state
+         */
         when {
             viewState == ViewState.IDLE -> {
                 ViewStatusCard(drawable = R.drawable.ic_search, text = null)

@@ -9,8 +9,8 @@ import io.ktor.client.request.get
 import javax.inject.Inject
 
 class DataSource @Inject constructor(private val httpClient: HttpClient) {
-    suspend fun searchQuery(query: String): GiphyResponse {
-        return httpClient.get("${BuildConfig.BASE_URL}gifs/search?api_key=$API_KEY&q=$query&limit=50")
+    suspend fun searchQuery(query: String, offset: String): GiphyResponse {
+        return httpClient.get("${BuildConfig.BASE_URL}gifs/search?api_key=$API_KEY&q=$query&limit=50&offset=$offset")
             .body()
     }
 }

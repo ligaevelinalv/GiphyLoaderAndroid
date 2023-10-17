@@ -1,8 +1,8 @@
 package com.example.giphyloader.common
 
 import com.example.giphyloader.network.DataSource
-import com.example.giphyloader.network.GifRepository
-import com.example.giphyloader.network.GifRepositoryImpl
+import com.example.giphyloader.repository.GifRepository
+import com.example.giphyloader.repository.GifRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,12 +21,12 @@ object InjectionModule {
     @Singleton
     fun provideKtorClient(): HttpClient {
         return HttpClient(Android) {
-            //to map json objects returned from the api to a kotlin data class
             install(ContentNegotiation) {
-                json(Json {
-                    //ignores json keys we have not included in our data class
-                    ignoreUnknownKeys = true
-                })
+                json(
+                    Json {
+                        ignoreUnknownKeys = true
+                    },
+                )
             }
         }
     }

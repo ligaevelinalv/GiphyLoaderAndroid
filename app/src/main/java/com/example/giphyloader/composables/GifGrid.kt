@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,6 +15,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.itemContentType
+import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
 import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
@@ -25,7 +27,7 @@ import com.example.giphyloader.network.models.GifModel
 @Composable
 fun GifGrid(
     modifier: Modifier = Modifier,
-    gifList: List<GifModel>,
+    gifList: LazyPagingItems<GifModel>,
 ) {
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(3),
@@ -33,8 +35,14 @@ fun GifGrid(
         verticalItemSpacing = 12.dp,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         contentPadding = PaddingValues(vertical = 8.dp),
-        content = {
-            items(gifList, key = { it.id }) { item ->
+    ) {
+        items(
+            count = gifList.itemCount,
+            key = gifList.itemKey { it.id },
+            contentType = gifList.itemContentType { "GifItems" },
+        ) { index ->
+            val item = gifList[index]
+            if (item != null) {
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(item.url)
@@ -51,8 +59,8 @@ fun GifGrid(
                     contentScale = ContentScale.Crop,
                 )
             }
-        },
-    )
+        }
+    }
 }
 
 fun pxToDp(pxValue: String, context: Context): Dp {

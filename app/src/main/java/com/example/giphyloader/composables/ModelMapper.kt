@@ -1,4 +1,7 @@
-package com.example.giphyloader.network.models
+package com.example.giphyloader.composables
+
+import com.example.giphyloader.network.models.GifModel
+import com.example.giphyloader.network.models.GiphyResponse
 
 fun GiphyResponse.asGifModelList(): List<GifModel> =
     this.data.map {

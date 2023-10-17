@@ -30,7 +30,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -79,14 +79,14 @@ dependencies {
     // LazyVerticalStaggeredGrid
     implementation("androidx.compose.foundation:foundation:1.5.3")
 
-    //Ktor
+    // Ktor
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-android:$ktorVersion")
     implementation("io.ktor:ktor-client-serialization:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
-    //JSON serialization
+    // JSON serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
     // Hilt/ Dagger
@@ -102,4 +102,8 @@ dependencies {
     dependencies {
         implementation("androidx.core:core-splashscreen:1.0.1")
     }
+
+    // Paging3
+    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
+    implementation("androidx.paging:paging-compose:3.3.0-alpha02")
 }

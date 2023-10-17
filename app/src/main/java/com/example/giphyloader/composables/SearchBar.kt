@@ -33,16 +33,20 @@ fun SearchBar(
     TextField(
         value = inputText,
         onValueChange = { newInput -> onSearchInputChanged(newInput) },
-        leadingIcon = {
-            if (searchFieldState == SearchFieldState.IDLE || searchFieldState == SearchFieldState.EMPTY) {
+        leadingIcon =
+        if (searchFieldState == SearchFieldState.IDLE || searchFieldState == SearchFieldState.EMPTY) {
+            {
                 Icon(
                     imageVector = Icons.Default.Search,
                     contentDescription = null,
                     tint = colorResource(id = R.color.dark_purple),
                 )
             }
+        } else {
+            null
         },
-        trailingIcon = if (searchFieldState == SearchFieldState.INPUT) {
+        trailingIcon =
+        if (searchFieldState == SearchFieldState.INPUT) {
             {
                 Icon(
                     imageVector = Icons.Default.Close,

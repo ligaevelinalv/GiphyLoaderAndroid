@@ -1,9 +1,11 @@
 package com.example.giphyloader.composables
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,18 +16,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.giphyloader.network.RequestState
-import com.example.giphyloader.viewmodels.GifViewModel
+import androidx.paging.LoadState
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.giphyloader.common.ViewState
+import com.example.giphyloader.viewmodel.GifViewModel
 
 @Composable
 fun GifScreen(
     modifier: Modifier = Modifier,
     viewModel: GifViewModel = hiltViewModel(),
 ) {
-    val requestState = viewModel.requestState.collectAsState(RequestState.Idle()).value
+    val gifList = viewModel.gifList.collectAsLazyPagingItems()
     val searchFieldState = viewModel.searchFieldState.collectAsState().value
-    val inputText = viewModel.inputText.collectAsState().value
+    val viewState = viewModel.viewState.collectAsState().value
+    val inputText = viewModel.query.collectAsState().value
     val focusManager = LocalFocusManager.current
+
+    val scrollState = rememberScrollState()
 
     Column {
         SearchBar(
@@ -36,40 +43,48 @@ fun GifScreen(
             onClearInputClicked = { viewModel.clearInput() },
         )
 
-        LaunchedEffect(requestState) {
-            if (requestState is RequestState.Success) {
+        LaunchedEffect(viewState) {
+            if (viewState == ViewState.IDLE) {
                 focusManager.clearFocus()
             }
         }
-        when (requestState) {
-            is RequestState.Idle -> {
+
+        LaunchedEffect(scrollState) {
+            Log.i("AAAA", "fsdgds")
+        }
+
+        when {
+            viewState == ViewState.IDLE -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Text(text = "Start searching")
                 }
             }
 
-            is RequestState.Error -> {
+            gifList.loadState.refresh is LoadState.Error -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Text(text = "Error :(")
                 }
             }
 
-            is RequestState.Loading -> {
+            gifList.loadState.refresh is LoadState.Loading -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     CircularProgressIndicator()
                 }
             }
 
-            is RequestState.Success -> {
-                requestState.data?.let {
-                    GifGrid(
-                        modifier = modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                        ),
-                        it,
-                    )
+            else -> {
+                if (gifList.itemSnapshotList.size == 0) {
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        Text(text = "Error :(")
+                    }
                 }
+                GifGrid(
+                    modifier = modifier.padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                    ),
+                    gifList,
+                )
             }
         }
     }

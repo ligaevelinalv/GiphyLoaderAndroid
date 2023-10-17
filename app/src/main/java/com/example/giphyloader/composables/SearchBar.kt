@@ -66,10 +66,11 @@ fun SearchBar(
             .heightIn(min = 56.dp),
         shape = RoundedCornerShape(10.dp),
         colors = TextFieldDefaults.textFieldColors(
+            textColor = colorResource(id = R.color.dark_purple),
             unfocusedIndicatorColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
             containerColor = colorResource(id = R.color.light_purple),
-            placeholderColor = colorResource(id = R.color.dark_purple),
+            placeholderColor = colorResource(id = R.color.purple),
             cursorColor = colorResource(id = R.color.dark_purple),
         ),
     )

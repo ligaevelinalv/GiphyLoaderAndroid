@@ -64,9 +64,5 @@ fun GifGrid(
 }
 
 fun pxToDp(pxValue: String, context: Context): Dp {
-    val screenPixelDensity = context.resources.displayMetrics.density
-    var dpVal = pxValue.toFloat() / screenPixelDensity
-    dpVal *= 2
-
-    return dpVal.toInt().dp
+    return ((pxValue.toFloat() / context.resources.displayMetrics.density) * 2).toInt().dp
 }
